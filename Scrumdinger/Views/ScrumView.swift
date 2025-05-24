@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct ScrumView: View {
+    let scurms: [DailyScrum]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(scurms) { scurm in
+                NavigationLink(destination: DetailView(scrum: scurm)) {
+                    CardView(scrum: scurm)
+                }
+                .listRowBackground(scurm.theme.mainColor)
+            }
+            .navigationTitle("Daily Scurms")
+            .toolbar {
+                Button(action: {}) {
+                    Image(systemName: "plus")
+                        .bold()
+                        .padding()
+                        .accessibilityLabel("New Scrum")
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    ScrumView()
+    ScrumView(scurms: DailyScrum.sampleData)
 }

@@ -9,7 +9,23 @@ import SwiftUI
 
 struct PoweredByView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 2) {
+            HStack {
+                Image("Dista_logo_orange")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                Text("Powered by Dista")
+                    .foregroundColor(.primary)
+                    .font(.body)
+            }
+            
+            Text("Version 1.0.0")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                .padding(.leading, 24)
+        }
+        .frame(height: 200)
+        .background(Color.clear)
     }
 }
 

@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ScrumdingerApp: App {
+    let scurms = DailyScrum.sampleData
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ScrumView(scurms: scurms)
         }
     }
 }
