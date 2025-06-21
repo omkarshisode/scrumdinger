@@ -8,36 +8,37 @@
 import SwiftUI
 
 struct DetailEditView: View {
-    @State private var emptyScrum = DailyScrum.emptyScrum
+    @Binding var scrum: DailyScrum
     @State private var attendeName = ""
     
     var body: some View {
         Form {
             Section(header: Text("Meeting info")) {
-                TextField("Title", text: $emptyScrum.title)
+                TextField("Title", text: $scrum.title)
                 HStack {
-                    Slider(value: $emptyScrum.lengthInMinutesAsDouble, in: 5...30, step: 1) {
+                    Slider(value: $scrum.lengthInMinutesAsDouble, in: 5...30, step: 1) {
                         Text("Length")
                     }
-                    .accessibilityValue("\(emptyScrum.lengthInMinutes) minutes")
+                    .accessibilityValue("\(scrum.lengthInMinutes) minutes")
                     Spacer()
-                    Text("\(emptyScrum.lengthInMinutes) minutes")
+                    Text("\(scrum.lengthInMinutes) minutes")
                         .accessibilityHidden(true)
                 }
+                ThemePicker(selection: $scrum.theme)
             }
             Section(header: Text("Attendees")) {
-                ForEach(emptyScrum.attendences) { attendee in
+                ForEach(scrum.attendences) { attendee in
                     Text(attendee.name)
                 }
                 .onDelete { indices in
-                    emptyScrum.attendences.remove(atOffsets: indices)
+                    scrum.attendences.remove(atOffsets: indices)
                 }
                 HStack {
                     TextField("New Attendee", text: $attendeName)
                     Button(action: {
                         withAnimation {
                             let newAttendee = DailyScrum.Attendee(name: attendeName)
-                            emptyScrum.attendences.append(newAttendee)
+                            scrum.attendences.append(newAttendee)
                             attendeName = ""
                         }
                     }){
@@ -51,5 +52,6 @@ struct DetailEditView: View {
 }
 
 #Preview {
-    DetailEditView()
+    @Previewable @State var emptyScrum = DailyScrum.emptyScrum
+    DetailEditView(scrum: $emptyScrum)
 }
