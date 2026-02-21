@@ -9,12 +9,15 @@ import SwiftUI
 
 struct DetailEditView: View {
     @Binding var scrum: DailyScrum
-    @State private var attendeName = ""
+    @State private var attendeesName = ""
     
     var body: some View {
         Form {
             Section(header: Text("Meeting info")) {
+                // Edit title
                 TextField("Title", text: $scrum.title)
+                
+                // Edit time
                 HStack {
                     Slider(value: $scrum.lengthInMinutesAsDouble, in: 5...30, step: 1) {
                         Text("Length")
@@ -24,22 +27,28 @@ struct DetailEditView: View {
                     Text("\(scrum.lengthInMinutes) minutes")
                         .accessibilityHidden(true)
                 }
+                
+                // Edit theme
                 ThemePicker(selection: $scrum.theme)
             }
+            
+            // Edit attendees
             Section(header: Text("Attendees")) {
-                ForEach(scrum.attendences) { attendee in
+                ForEach(scrum.attendees) { attendee in
                     Text(attendee.name)
                 }
                 .onDelete { indices in
-                    scrum.attendences.remove(atOffsets: indices)
+                    scrum.attendees.remove(atOffsets: indices)
                 }
+                
                 HStack {
-                    TextField("New Attendee", text: $attendeName)
+                    TextField("New Attendee", text: $attendeesName)
+                    
                     Button(action: {
                         withAnimation {
-                            let newAttendee = DailyScrum.Attendee(name: attendeName)
-                            scrum.attendences.append(newAttendee)
-                            attendeName = ""
+                            let newAttendee = DailyScrum.Attendee(name: attendeesName)
+                            scrum.attendees.append(newAttendee)
+                            attendeesName = ""
                         }
                     }){
                         Image(systemName: "plus.circle.fill")

@@ -9,40 +9,37 @@ import SwiftUI
 
 struct MeetingView: View {
     var body: some View {
-        NavigationStack {
-            VStack {
-                ProgressView(value: 2, total: 10)
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Seconds Elapsed")
-                            .font(.caption)
-                        Label("300", systemImage: "hourglass.tophalf.fill")
-                    }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .trailing) {
-                        Text("Seconds Remanining")
-                            .font(.caption)
-                        Label("600", systemImage: "hourglass.bottomhalf.fill")
-                    }
+        VStack {
+            ProgressView(value: 2, total: 10)
+            HStack {
+                VStack {
+                    Text("Seconds Elapsed")
+                        .font(.caption)
+                    Label("300", systemImage: "hourglass.tophalf.fill")
                 }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Time remainging")
-                .accessibilityValue("10 mintues")
-                Circle()
-                    .strokeBorder(lineWidth: 24)
-                HStack {
-                    Text("Speaker 1 to 3")
-                    Spacer()
-                    Button(action: { }) {
-                        Image(systemName: "forward.fill")
-                    }
-                    .accessibilityLabel("Next Speaker")
+                Spacer()
+                VStack {
+                    Text("Seconds Remaining")
+                        .font(.caption)
+                    Label("600", systemImage: "hourglass.bottomhalf.fill")
                 }
-            }.padding()
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Time remaning")
         }
-        .navigationTitle("Design")
+        
+        Circle()
+            .stroke(lineWidth: 24)
+        
+        HStack {
+            Text("Speaker 1 of 3")
+            Spacer()
+            Button(action: {}) {
+                Image(systemName: "forward.fill")
+            }
+        }
+        .padding()
+        
     }
 }
 

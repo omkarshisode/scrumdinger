@@ -15,26 +15,24 @@ struct CardView: View {
             Text(scrum.title)
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
-            
+            Spacer()
             HStack {
-                Label("\(scrum.attendences.count)", systemImage: "person.3")
-                
+                Label("\(scrum.attendees.count)", systemImage: "person.3")
+                    .accessibilityLabel("\(scrum.attendees.count) attendees")
                 Spacer()
-                
-                Label("\(scrum.lengthInMinutes) min", systemImage: "clock")
-                    .labelStyle(.tralingIocn)
-                
+                Label("\(scrum.lengthInMinutes)", systemImage: "clock")
+                    .labelStyle(.trailingIcon)
+                    .accessibilityLabel("\(scrum.lengthInMinutes) minutes meeting")
             }
             .font(.caption)
         }
         .padding()
         .foregroundColor(scrum.theme.accentColor)
-        .ALI
+        .background(scrum.theme.mainColor)
     }
 }
 
 #Preview(traits: .fixedLayout(width: 600, height: 60)){
     let scurm = DailyScrum.sampleData[0]
     CardView(scrum: scurm)
-        .background(scurm.theme.mainColor)
 }

@@ -21,12 +21,16 @@ struct DetailView: View {
                         .font(.headline)
                         .foregroundColor(.accentColor)
                 }
+                
+                // Meeting length
                 HStack {
                     Label("Length", systemImage: "clock")
                     Spacer()
                     Text("\(scrum.lengthInMinutes) minutes")
                 }
                 .accessibilityElement(children: .combine)
+                
+                // Selected theme
                 HStack {
                     Label("Theme", systemImage: "paintpalette")
                     Spacer()
@@ -41,7 +45,7 @@ struct DetailView: View {
             
             // Attendee
             Section(header: Text("Attendees")) {
-                ForEach(scrum.attendences) { attende in
+                ForEach(scrum.attendees) { attende in
                     Label(attende.name, systemImage: "person")
                 }
             }

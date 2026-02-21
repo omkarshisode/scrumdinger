@@ -1,5 +1,5 @@
 //
-//  TralingIconLableStyle.swift
+//  TrailingIconLabelStyle.swift
 //  Scrumdinger
 //
 //  Created by Omkar Shisode on 16/05/25.
@@ -18,5 +18,5 @@ struct TrailingIconLabelStyle: LabelStyle {
 }
 
 extension LabelStyle where Self == TrailingIconLabelStyle {
-    static var tralingIocn: Self { Self() }
+    static var trailingIcon: Self { Self() }
 }
