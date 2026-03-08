@@ -12,8 +12,12 @@ struct ScrumdingerApp: App {
     @State private var scrums = DailyScrum.sampleData
     
     var body: some Scene {
-        WindowGroup {
+        WindowGroup("Daily Scrum") {
             ScrumView(scrums: $scrums)
+        }
+        
+        WindowGroup("Card View"){
+            CardView(scrum: DailyScrum.sampleData.first!)
         }
     }
 }
